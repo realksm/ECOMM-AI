@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -47,10 +48,11 @@ public class User extends BaseEntity {
     @Pattern(regexp = "^[0-9]{10,15}$")
     private String phone;
 
+    @Builder.Default
     @ElementCollection
     @CollectionTable(
             name = "user_addresses",
             joinColumns = @JoinColumn(name = "user_id")
     )
-    private List<Address> addresses;
+    private List<Address> addresses = new ArrayList<>();
 }
