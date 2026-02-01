@@ -22,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class User extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,18 +33,24 @@ public class User extends BaseEntity {
     private String email;
 
     @NotBlank
+    @Column(nullable = false)
     private String password;
 
     @NotBlank
+    @Column(nullable = false)
     private String firstName;
 
     @NotBlank
+    @Column(nullable = false)
     private String lastName;
 
     @Pattern(regexp = "^[0-9]{10,15}$")
     private String phone;
 
     @ElementCollection
-    @CollectionTable(name = "user_addresses")
+    @CollectionTable(
+            name = "user_addresses",
+            joinColumns = @JoinColumn(name = "user_id")
+    )
     private List<Address> addresses;
 }

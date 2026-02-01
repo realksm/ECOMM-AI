@@ -41,8 +41,5 @@ public class Order extends BaseEntity {
     @Embedded
     private Address shippingAddress;
 
-    @Embedded
-    private Address billingAddress;
-
     private String paymentId;
 }
