@@ -35,10 +35,6 @@ public class User extends BaseEntity {
 
     @NotBlank
     @Column(nullable = false)
-    private String password;
-
-    @NotBlank
-    @Column(nullable = false)
     private String firstName;
 
     @NotBlank
