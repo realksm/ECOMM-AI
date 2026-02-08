@@ -1,6 +1,7 @@
 package com.ksm.ecommerce.dto.request;
 
 import com.ksm.ecommerce.dto.common.AddressDTO;
+import com.ksm.ecommerce.entity.embedded.Address;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -16,5 +17,5 @@ public class UserUpdateRequest {
 
     private String phone;
 
-    private List<AddressDTO> addresses;
+private List<Address> addresses;
 }

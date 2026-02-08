@@ -1,14 +1,13 @@
 package com.ksm.ecommerce.controller;
 
 import com.ksm.ecommerce.dto.request.ChangePasswordRequest;
-import com.ksm.ecommerce.dto.request.UserRegisterRequest;
+import com.ksm.ecommerce.dto.request.UserCreateRequest;
 import com.ksm.ecommerce.dto.request.UserUpdateRequest;
 import com.ksm.ecommerce.dto.response.UserResponse;
 import com.ksm.ecommerce.entity.User;
 import com.ksm.ecommerce.mapper.UserMapper;
 import com.ksm.ecommerce.service.UserService;
 import jakarta.validation.Valid;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +21,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final UserMapper userMapper;
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> registerUser(@Valid @RequestBody UserRegisterRequest request) {
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(userMapper.toResponse(
-                        userService.register(
-                            userMapper.toEntity(request)
+                .body(UserMapper.toResponse(
+                        userService.create(
+                                UserMapper.toEntity(request)
                                 )
                         )
                 );
@@ -38,7 +36,7 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(
-                userMapper.toResponse(
+                UserMapper.toResponse(
                         userService.getById(id)
                 )
         );
@@ -47,7 +45,7 @@ public class UserController {
     @GetMapping("/email")
     public ResponseEntity<UserResponse> getByEmail(@RequestParam String email) {
         return ResponseEntity.ok(
-                userMapper.toResponse(
+                UserMapper.toResponse(
                         userService.getByEmail(email)
                 )
         );
@@ -58,9 +56,9 @@ public class UserController {
             @PathVariable Long id,
             @Valid @RequestBody UserUpdateRequest request) {
         return ResponseEntity.ok(
-                userMapper.toResponse(
+                UserMapper.toResponse(
                         userService.updateProfile(
-                                id, userMapper.toEntity(request)
+                                id, UserMapper.toEntity(request)
                         )
                 )
         );
