@@ -11,7 +11,6 @@ import com.ksm.ecommerce.repo.UserRepository;
 import com.ksm.ecommerce.security.JwtUtil;
 import com.ksm.ecommerce.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
