@@ -32,6 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignore specific files
+### Custom Ignores ###
 src/main/resources/application.properties
 pom.xml
