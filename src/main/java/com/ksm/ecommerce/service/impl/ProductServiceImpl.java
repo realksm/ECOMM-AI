@@ -58,7 +58,6 @@ public class ProductServiceImpl implements ProductService {
         existingProduct.setDescription(productDTO.getDescription());
         existingProduct.setPrice(BigDecimal.valueOf(productDTO.getPrice()));
         existingProduct.setStock(productDTO.getQuantity());
-        // Map first image back to list
         existingProduct.setImages(List.of(productDTO.getImage()));
 
         Product updatedProduct = productRepository.save(existingProduct);
@@ -74,7 +73,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(productId);
     }
 
-    // --- Helper Mapping Methods ---
 
     private ProductDTO toDTO(Product product) {
         ProductDTO dto = new ProductDTO();
@@ -83,11 +81,9 @@ public class ProductServiceImpl implements ProductService {
         dto.setDescription(product.getDescription());
         dto.setQuantity(product.getStock());
         dto.setPrice(product.getPrice().doubleValue());
-        // Handling the list of images for the single string DTO field
         dto.setImage(product.getImages() != null && !product.getImages().isEmpty()
                 ? product.getImages().get(0) : null);
 
-        // Note: Discount/SpecialPrice logic can be added here if fields exist in Entity
         return dto;
     }
 
@@ -98,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
                 .price(BigDecimal.valueOf(dto.getPrice()))
                 .stock(dto.getQuantity())
                 .images(List.of(dto.getImage()))
-                .category("Default") // Adjust based on your logic
+                .category("Default")
                 .build();
     }
 }
