@@ -1,4 +1,4 @@
-package com.ksm.ecommerce.exceptions;
+package com.ksm.ecommerce.exception;
 
 public class APIException extends RuntimeException {
     private static final long serialVersionUID = 1L;

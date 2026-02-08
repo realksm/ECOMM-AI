@@ -9,4 +9,7 @@ public interface ProductService {
     Product getById(Long productId);
     List<Product> search(String keyword);
     List<Product> getByCategory(String category);
+    //Admin Access To DO
+    Product update(Long productId, Product productDetails);
+    void delete(Long productId);
 }
