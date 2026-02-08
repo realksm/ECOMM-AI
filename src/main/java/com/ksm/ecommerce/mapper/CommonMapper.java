@@ -1,7 +1,10 @@
 package com.ksm.ecommerce.mapper;
 
 import com.ksm.ecommerce.dto.common.AddressDTO;
+import com.ksm.ecommerce.dto.common.CartItemDTO;
+import com.ksm.ecommerce.dto.common.OrderItemDTO;
 import com.ksm.ecommerce.entity.embedded.Address;
+import com.ksm.ecommerce.entity.embedded.CartItem;
 import com.ksm.ecommerce.entity.embedded.OrderItem;
 import org.mapstruct.Mapper;
 
