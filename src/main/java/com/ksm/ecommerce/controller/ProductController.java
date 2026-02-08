@@ -1,8 +1,7 @@
 package com.ksm.ecommerce.controller;
 
-import com.ksm.ecommerce.entity.Product;
+import com.ksm.ecommerce.dto.ProductDTO;
 import com.ksm.ecommerce.service.ProductService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +17,16 @@ public class ProductController {
 
     private final ProductService productService;
 
-    // RESTRICTED: Admin only (Need implementation)
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
-        return new ResponseEntity<>(productService.create(product), HttpStatus.CREATED);
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
+        return new ResponseEntity<>(productService.create(productDTO), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product) {
-        return ResponseEntity.ok(productService.update(id, product));
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
+        return ResponseEntity.ok(productService.update(id, productDTO));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -38,19 +36,13 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    // PUBLIC: Anyone can view
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getById(id));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Product>> searchProducts(@RequestParam String keyword) {
+    public ResponseEntity<List<ProductDTO>> searchProducts(@RequestParam String keyword) {
         return ResponseEntity.ok(productService.search(keyword));
-    }
-
-    @GetMapping("/category/{category}")
-    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
-        return ResponseEntity.ok(productService.getByCategory(category));
     }
 }
